@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # DEMO PROACTIVE
+  postgres_demo_proactive:
+    container_name: rizt_postgres_demo_proactive
+    image: postgres:15.4
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRESS_DEMO_PROACTIVE_NAME}
+      PGDATA: var/lib/postgresql/data/pgdata
+    volumes:
+      - rizt_postgres_data_demo_proactive:/var/lib/postgresql
+    networks:
+      - rizt-network-dev
+
+networks:
+  rizt-network-dev:
+    driver: bridge
+
+volumes:
+  # DEMO PROACTIVE
+  rizt_postgres_data_demo_proactive:
+    driver: local
+    name: rizt_postgres_data_demo_proactive
